@@ -1,0 +1,37 @@
+@(inproceedingsForm: Form[Inproceedings])
+
+@import helper._
+
+@main(title = "Create reference") {
+
+<h1>Create inproceedings reference</h1>
+
+@form(action = routes.Application.printProceedings, args = 'id -> "inproceedingsForm") {
+
+@inputText(
+field = inproceedingsForm("author"),
+args = '_label -> "Author"
+)
+
+@inputText(
+field = inproceedingsForm("title"),
+args = '_label -> "Title"
+)
+
+@inputText(
+field = inproceedingsForm("booktitle"),
+args = '_label -> "Booktitle"
+)
+
+@inputText(
+field = inproceedingsForm("year"),
+args = '_label -> "Year"
+)
+
+<p class="buttons">
+    <input type="submit">
+<p>
+
+    }
+
+    }

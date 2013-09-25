@@ -1,18 +1,24 @@
 package models;
 
+import play.data.validation.Constraints.Required;
+
 public class Inproceedings {
 
-    private String author;
-    private String title;
-    private String booktitle;
-    private int year;
+    @Required
+    public String author;
+    @Required
+    public String title;
+    @Required
+    public String booktitle;
+    @Required
+    public int year;
 
-    public Inproceedings(String author, String title, String booktitle, int year) {
-        this.author = author;
-        this.title = title;
-        this.booktitle = booktitle;
-        this.year = year;
-    }
+//    public Inproceedings(String author, String title, String booktitle, int year) {
+//        this.author = author;
+//        this.title = title;
+//        this.booktitle = booktitle;
+//        this.year = year;
+//    }
 
     public String getAuthor() {
         return author;
