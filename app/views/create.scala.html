@@ -4,9 +4,11 @@
 
 @main(title = "Create reference") {
 
+<script src='@routes.Assets.at("javascripts/index.js")'></script>
+
 <h1>Create inproceedings reference</h1>
 
-@form(action = routes.Application.printProceedings, args = 'id -> "inproceedingsForm") {
+@form(action = routes.Application.addProceedings, args = 'id -> "inproceedingsForm") {
 
 @inputText(
 field = inproceedingsForm("author"),
@@ -31,6 +33,9 @@ args = '_label -> "Year"
 <p class="buttons">
     <input type="submit">
 <p>
+
+<h1>Saved inproceedings</h1>
+<ul id="inproceedings"></ul>
 
     }
 

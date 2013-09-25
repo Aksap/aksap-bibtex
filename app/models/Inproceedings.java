@@ -1,9 +1,16 @@
 package models;
 
 import play.data.validation.Constraints.Required;
+import play.db.ebean.Model;
 
-public class Inproceedings {
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+@Entity
+public class Inproceedings extends Model{
+
+    @Id
+    public int id;
     @Required
     public String author;
     @Required
@@ -19,6 +26,14 @@ public class Inproceedings {
 //        this.booktitle = booktitle;
 //        this.year = year;
 //    }
+
+    public int getId(){
+       return id;
+    }
+
+    public void setId(int id){
+        this.id = id;
+    }
 
     public String getAuthor() {
         return author;
