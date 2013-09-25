@@ -1,3 +1,8 @@
+import de.johoop.jacoco4sbt._
+import JacocoPlugin._
+
+jacoco.settings
+
 name := "aksap-bibtex"
 
 version := "1.0-SNAPSHOT"
