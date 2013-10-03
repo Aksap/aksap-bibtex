@@ -5,38 +5,141 @@
 @main(title = "Create reference") {
 
 <script src='@routes.Assets.at("javascripts/index.js")'></script>
+<script type="text/javascript"></script>
+<section id="wrapper">
+    <h1>AKSAP References<br><br></h1>
+    <header>
+        <nav>
+            <a href="#">Inproceedings</a> || <a href="#">Article</a> || <a href="#">Book</a>
+        </nav>
+        <br>
+        <a href="../export.bib" download="export.bib">Export all <i>(.bib)</i></a>
+    </header>
+    <section id="add">
 
-<h1>Create inproceedings reference</h1>
+        <article>
+            <h1>Add Inproceedings</h1>
+            @form(action = routes.Application.addProceedings, args = 'id -> "inproceedingsForm") {
 
-@form(action = routes.Application.addProceedings, args = 'id -> "inproceedingsForm") {
+            @inputText(
+            field = inproceedingsForm("id"),
+            args = '_label -> "Id"
+            )
 
-@inputText(
-field = inproceedingsForm("author"),
-args = '_label -> "Author"
-)
+            @inputText(
+            field = inproceedingsForm("author"),
+            args = '_label -> "Author"
+            )
 
-@inputText(
-field = inproceedingsForm("title"),
-args = '_label -> "Title"
-)
+            @inputText(
+            field = inproceedingsForm("title"),
+            args = '_label -> "Title"
+            )
 
-@inputText(
-field = inproceedingsForm("booktitle"),
-args = '_label -> "Booktitle"
-)
+            @inputText(
+            field = inproceedingsForm("booktitle"),
+            args = '_label -> "Booktitle"
+            )
 
-@inputText(
-field = inproceedingsForm("year"),
-args = '_label -> "Year"
-)
+            @inputText(
+            field = inproceedingsForm("year"),
+            args = '_label -> "Year"
+            )
+            <p class="buttons">
+                <input type="submit">
 
-<p class="buttons">
-    <input type="submit">
-<p>
+            <p>
+            }
+                </div>
+        </article>
 
-<h1>Saved inproceedings</h1>
-<ul id="inproceedings"></ul>
+        <article class="hidden">
+            <div id="ArticleForm">
+                <h1>Add Article</h1>
+                @form(action = routes.Application.addArticle, args = 'id -> "articleForm") {
 
-    }
+                @inputText(
+                field = inproceedingsForm("id"),
+                args = '_label -> "Id"
+                )
 
-    }
+                @inputText(
+                field = inproceedingsForm("author"),
+                args = '_label -> "Author"
+                )
+
+                @inputText(
+                field = inproceedingsForm("title"),
+                args = '_label -> "Title"
+                )
+
+                @inputText(
+                field = inproceedingsForm("journal"),
+                args = '_label -> "Journal"
+                )
+
+                @inputText(
+                field = inproceedingsForm("year"),
+                args = '_label -> "Year"
+                )
+
+                <p class="buttons">
+                    <input type="submit">
+
+                <p>
+                }
+            </div>
+        </article>
+
+
+        <article class="hidden">
+            <div id="BookForm">
+                <h1>Add Book</h1>
+                @form(action = routes.Application.addBook, args = 'id -> "articleForm") {
+
+                @inputText(
+                field = inproceedingsForm("id"),
+                args = '_label -> "Id"
+                )
+
+                @inputText(
+                field = inproceedingsForm("author"),
+                args = '_label -> "Author"
+                )
+
+                @inputText(
+                field = inproceedingsForm("title"),
+                args = '_label -> "Title"
+                )
+
+                @inputText(
+                field = inproceedingsForm("publisher"),
+                args = '_label -> "Publisher"
+                )
+
+                @inputText(
+                field = inproceedingsForm("year"),
+                args = '_label -> "Year"
+                )
+                <p class="buttons">
+                    <input type="submit">
+
+                <p>
+                }
+            </div>
+        </article>
+    </section>
+
+    <section id="show">
+        <h1>Articles</h1>
+        <ul id="article"></ul>
+        <h1>Books</h1>
+        <ul id="book"></ul>
+        <h1>Inproceedings</h1>
+        <ul id="inproceedings"></ul>
+    </section>
+</section>
+
+
+
+}

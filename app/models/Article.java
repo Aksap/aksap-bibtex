@@ -5,12 +5,9 @@ import play.db.ebean.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.validation.constraints.Max;
-
-import play.data.validation.Validation;
 
 @Entity
-public class Inproceedings extends Model{
+public class Article extends Model{
 
     @Required
     @Id
@@ -19,8 +16,9 @@ public class Inproceedings extends Model{
     public String author;
     @Required
     public String title;
+
     @Required
-    public String booktitle;
+    public String journal;
     @Required
     //@Max(2013)
     public int year;
@@ -49,12 +47,12 @@ public class Inproceedings extends Model{
         this.title = title;
     }
 
-    public String getBooktitle() {
-        return booktitle;
+    public String getJournal() {
+        return journal;
     }
 
-    public void setBooktitle(String booktitle) {
-        this.booktitle = booktitle;
+    public void setJournal(String journal) {
+        this.journal = journal;
     }
 
     public int getYear() {

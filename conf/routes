@@ -7,9 +7,21 @@ GET     /                           controllers.Application.index()
 GET     /proceedings/create         controllers.Application.createProceedings()
 GET     /proceedings/print          controllers.Application.printProceedings()
 POST    /proceedings/add            controllers.Application.addProceedings()
+POST    /articles/add               controllers.Application.addArticle()
+POST    /books/add                  controllers.Application.addBook()
+POST    /misc/add                   controllers.Application.addMisc()
+
+# JSON
+GET     /proceedings/show/:id       controllers.Application.showProceeding(id: String)
 GET     /proceedings/show           controllers.Application.getProceedings()
-GET     /proceedings/show/:id      controllers.Application.showProceeding(id: Integer)
+GET     /articles/show              controllers.Application.getArticles()
+GET     /books/show                 controllers.Application.getBooks()
+
+# BibTex
+GET     /books/bib/:id.bib          controllers.Application.getBookTex(id: String)
+GET     /articles/bib/:id.bib       controllers.Application.getArticleTex(id: String)
+GET     /inproceedings/bib/:id.bib  controllers.Application.getProceedingsTex(id: String)
+GET     /export.bib                 controllers.Application.getBibTex()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
-GET     /*file                      controllers.Assets.at(path="/public", file)
