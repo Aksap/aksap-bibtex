@@ -60,31 +60,37 @@
 
                 @inputText(
                 field = inproceedingsForm("id"),
-                args = '_label -> "Id"
+                args = '_label -> "Id",
+                't_name -> "Article-Id"
                 )
 
                 @inputText(
                 field = inproceedingsForm("author"),
-                args = '_label -> "Author"
+                args = '_label -> "Author",
+                't_name -> "Article-Author"
                 )
 
                 @inputText(
                 field = inproceedingsForm("title"),
-                args = '_label -> "Title"
+                args = '_label -> "Title",
+                't_name -> "Article-Title"
                 )
 
                 @inputText(
                 field = inproceedingsForm("journal"),
-                args = '_label -> "Journal"
+                args = '_label -> "Journal",
+                't_name -> "Article-Journal"
+
                 )
 
                 @inputText(
                 field = inproceedingsForm("year"),
-                args = '_label -> "Year"
+                args = '_label -> "Year",
+                't_name -> "Article-Year"
                 )
 
                 <p class="buttons">
-                    <input type="submit">
+                    <input type="submit" id="add_article">
 
                 <p>
                 }
@@ -99,30 +105,36 @@
 
                 @inputText(
                 field = inproceedingsForm("id"),
-                args = '_label -> "Id"
+                args = '_label -> "Id",
+                't_name -> "Book-Id"
                 )
 
                 @inputText(
                 field = inproceedingsForm("author"),
-                args = '_label -> "Author"
+                args = '_label -> "Author",
+                't_name -> "Book-Author"
                 )
 
                 @inputText(
                 field = inproceedingsForm("title"),
-                args = '_label -> "Title"
+                args = '_label -> "Title",
+                't_name -> "Book-Title"
                 )
 
                 @inputText(
                 field = inproceedingsForm("publisher"),
-                args = '_label -> "Publisher"
+                args = '_label -> "Publisher",
+                't_name -> "Book-Publisher"
                 )
 
                 @inputText(
                 field = inproceedingsForm("year"),
-                args = '_label -> "Year"
+                args = '_label -> "Year",
+                't_name -> "Book-Year"
+
                 )
                 <p class="buttons">
-                    <input type="submit">
+                    <input type="submit" id="add_book">
 
                 <p>
                 }

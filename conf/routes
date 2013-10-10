@@ -13,6 +13,9 @@ POST    /misc/add                   controllers.Application.addMisc()
 
 # JSON
 GET     /proceedings/show/:id       controllers.Application.showProceeding(id: String)
+GET     /books/show/:id             controllers.Application.showBook(id: String)
+GET     /articles/show/:id          controllers.Application.showArticle(id: String)
+
 GET     /proceedings/show           controllers.Application.getProceedings()
 GET     /articles/show              controllers.Application.getArticles()
 GET     /books/show                 controllers.Application.getBooks()

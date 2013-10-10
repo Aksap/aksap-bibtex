@@ -136,13 +136,29 @@ public class Application extends Controller {
 
     //Palauttaa URIssa annetun id:n perusteella oikean proceedingsin
     public static Result showProceeding(String id){
-        List<Inproceedings> inproceedings = new Model.Finder(Integer.class, Inproceedings.class).all();
+        List<Inproceedings> inproceedings = new Model.Finder(String.class, Inproceedings.class).all();
         for(Inproceedings i : inproceedings){
             if(i.getId().equals(id)) return ok(toJson(i));
         }
         return ok(toJson(null));
     }
 
+
+    public static Result showArticle(String id){
+        List<Article> articles = new Model.Finder(String.class, Article.class).all();
+        for(Article a : articles){
+            if(a.getId().equals(id)) return ok(toJson(a));
+        }
+        return ok(toJson(null));
+    }
+
+    public static Result showBook(String id){
+        List<Book> books = new Model.Finder(String.class, Book.class).all();
+        for(Book b : books){
+            if(b.getId().equals(id)) return ok(toJson(b));
+        }
+        return ok(toJson(null));
+    }
 
 
 
