@@ -10,7 +10,7 @@ import static play.test.Helpers.running;
 import static play.test.Helpers.start;
 import static play.test.Helpers.testServer;
 
-public class InproceedingsTest {
+public class BookTest {
     WebDriver driver;
     int port;
     String url;
@@ -18,18 +18,19 @@ public class InproceedingsTest {
 
     //VALUES
     String AUTHOR   = "Yrjö Meikäläinen";
-    String ID       = "ID42";
-    String TITLE    = "A Methodology for the Synthesis of Expert Systems";
-    String BOOKTITLE  = "Proceedings of INFOCOM";
-    String YEAR     = "2013";
+    String ID       = "ID666";
+    String TITLE    = "Raamattu";
+    String PUBLISHER = "Otava";
+    String YEAR     = "100";
 
     String FORMAL_BIBTEX_PRESENTATION = c("" +
-            "@inproceedings{"+ID+",\r\n" +
+            "@book{"+ID+",\r\n" +
             "author = {"+AUTHOR+"},\r\n" +
             "title = {"+TITLE+"},\r\n" +
-            "booktitle = {"+BOOKTITLE+"},\r\n" +
             "year = {"+YEAR+"},\r\n" +
+            "publisher = {"+PUBLISHER+"},\r\n" +
             "}");
+
 
     //Convert scands
     public String c(String s){
@@ -44,32 +45,32 @@ public class InproceedingsTest {
     }
 
     @Test
-    public void canAddInproceedings() throws Exception {
+    public void canAddBook() throws Exception {
         running(testServer(port), new Runnable() {
             public void run() {
 
-                //given "a form for adding inproceedings"
+                //given "a form for adding books"
                 driver.get(url + "/proceedings/create");
                 //
 
                 //when "valid values are submitted"
-                driver.findElement(By.name("id")).sendKeys(ID);
-                driver.findElement(By.name("author")).sendKeys(AUTHOR);
-                driver.findElement(By.name("title")).sendKeys(TITLE);
-                driver.findElement(By.name("booktitle")).sendKeys(BOOKTITLE);
-                driver.findElement(By.name("year")).sendKeys(YEAR);
+                driver.findElement(By.xpath("//input[@t_name='Book-Id']")).sendKeys(ID);
+                driver.findElement(By.xpath("//input[@t_name='Book-Author']")).sendKeys(AUTHOR);
+                driver.findElement(By.xpath("//input[@t_name='Book-Title']")).sendKeys(TITLE);
+                driver.findElement(By.xpath("//input[@t_name='Book-Publisher']")).sendKeys(PUBLISHER);
+                driver.findElement(By.xpath("//input[@t_name='Book-Year']")).sendKeys(YEAR);
 
-                driver.findElement(By.cssSelector("[type=submit]")).click();
+                driver.findElement(By.id("add_book")).click();
                 //
 
-                //then "an inproceedings should be created with correct values"
-                driver.get(url + "/proceedings/show/" + ID);
+                //then "a book should be created with correct values"
+                driver.get(url + "/books/show/"+ID);
                 String source = driver.getPageSource();
-
+                System.out.println(source);
                 assertTrue("Id missing", source.contains(ID));
                 assertTrue("Author missing", source.contains(AUTHOR));
                 assertTrue("Title missing", source.contains(TITLE));
-                assertTrue("Booktitle missing", source.contains(BOOKTITLE));
+                assertTrue("Publisher missing", source.contains(PUBLISHER));
                 assertTrue("Year missing", source.contains(YEAR));
                 //
             }
@@ -86,17 +87,17 @@ public class InproceedingsTest {
                 //
 
                 //when "valid values are submitted"
-                driver.findElement(By.name("id")).sendKeys(ID);
-                driver.findElement(By.name("author")).sendKeys(AUTHOR);
-                driver.findElement(By.name("title")).sendKeys(TITLE);
-                driver.findElement(By.name("booktitle")).sendKeys(BOOKTITLE);
-                driver.findElement(By.name("year")).sendKeys(YEAR);
+                driver.findElement(By.xpath("//input[@t_name='Book-Id']")).sendKeys(ID);
+                driver.findElement(By.xpath("//input[@t_name='Book-Author']")).sendKeys(AUTHOR);
+                driver.findElement(By.xpath("//input[@t_name='Book-Title']")).sendKeys(TITLE);
+                driver.findElement(By.xpath("//input[@t_name='Book-Publisher']")).sendKeys(PUBLISHER);
+                driver.findElement(By.xpath("//input[@t_name='Book-Year']")).sendKeys(YEAR);
 
-                driver.findElement(By.cssSelector("[type=submit]")).click();
+                driver.findElement(By.id("add_book")).click();
                 //
 
                 //then "a valid bibtex-presentation should be created and available"
-                driver.get(url + "/inproceedings/bib/" + ID + ".bib");
+                driver.get(url + "/books/bib/" + ID + ".bib");
                 String source = driver.getPageSource();
                 System.out.println(FORMAL_BIBTEX_PRESENTATION);
                 System.out.println(source);
@@ -104,7 +105,7 @@ public class InproceedingsTest {
                 assertTrue("Id missing", source.contains(c(ID)));
                 assertTrue("Author missing", source.contains(c(AUTHOR)));
                 assertTrue("Title missing", source.contains(c(TITLE)));
-                assertTrue("Publisher missing", source.contains(c(BOOKTITLE)));
+                assertTrue("Publisher missing", source.contains(c(PUBLISHER)));
                 assertTrue("Year missing", source.contains(c(YEAR)));
                 assertTrue("Scands are not rendered correctly", source.contains("\\\"{a}")
                         && source.contains("\\\"{o}"));
@@ -120,26 +121,25 @@ public class InproceedingsTest {
         running(testServer(port), new Runnable() {
             public void run() {
 
-                //given "an added inproceedings with delete option"
+                //given "an added book with delete option"
                 driver.get(url + "/proceedings/create");
+                driver.findElement(By.xpath("//input[@t_name='Book-Id']")).sendKeys(ID);
+                driver.findElement(By.xpath("//input[@t_name='Book-Author']")).sendKeys(AUTHOR);
+                driver.findElement(By.xpath("//input[@t_name='Book-Title']")).sendKeys(TITLE);
+                driver.findElement(By.xpath("//input[@t_name='Book-Publisher']")).sendKeys(PUBLISHER);
+                driver.findElement(By.xpath("//input[@t_name='Book-Year']")).sendKeys(YEAR);
 
-                driver.findElement(By.name("id")).sendKeys(ID);
-                driver.findElement(By.name("author")).sendKeys(AUTHOR);
-                driver.findElement(By.name("title")).sendKeys(TITLE);
-                driver.findElement(By.name("booktitle")).sendKeys(BOOKTITLE);
-                driver.findElement(By.name("year")).sendKeys(YEAR);
-
-                driver.findElement(By.cssSelector("[type=submit]")).click();
+                driver.findElement(By.id("add_book")).click();
                 //
 
                 //when "delete functionality is used"
-                driver.get(url + "/proceedings/delete/"+ID);
+                driver.get(url + "/books/delete/"+ID);
                 //
 
                 //then "reference should no longer exist"
-                driver.get(url + "/proceedings/show/"+ID);
+                driver.get(url + "/books/show/"+ID);
                 String source = driver.getPageSource();
-                assertTrue("Inproceedings prompted for delete still exists", !source.contains(ID));
+                assertTrue("Book prompted for delete still exists", !source.contains(ID));
                 //
             }
         });

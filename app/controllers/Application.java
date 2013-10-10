@@ -27,7 +27,12 @@ public class Application extends Controller {
         );
     }
 
-    //Kaamea tapa parseta, sry, pitää vaihtaa for each field -tyyliseksi.
+    //Convert scands
+    public static String c(String s){
+        return s.replace("ä", "\\\"{a}").replace("ö", "\\\"{o}");
+    }
+
+    //TODO: Fixaa parse
 
     public static Result getBibTex(){
         String result = "";
@@ -57,7 +62,9 @@ public class Application extends Controller {
                     "year = {"+book.getYear() +"},\r\n"+
                     "publisher = {"+book.getPublisher()+"},\r\n}\r\n\r\n";
         }
-        return ok(result);
+
+
+        return ok(c(result));
     }
 
     public static Result getArticleTex(String id){
@@ -71,7 +78,7 @@ public class Application extends Controller {
                 "title = {"+article.getTitle()+"},\r\n" +
                 "year = {"+article.getYear() +"},\r\n"+
                 "journal = {"+article.getJournal()+"},\r\n}";
-        return ok(result);
+        return ok(c(result));
     }
 
     public static Result getProceedingsTex(String id){
@@ -86,7 +93,7 @@ public class Application extends Controller {
                 "booktitle = {"+inproceedings.getBooktitle()+"},\r\n"+
                 "year = {"+inproceedings.getYear() +"},\r\n}";
 
-        return ok(result);
+        return ok(c(result));
     }
 
     public static Result getBookTex(String id){
@@ -100,8 +107,10 @@ public class Application extends Controller {
                "title = {"+book.getTitle()+"},\r\n" +
                "year = {"+book.getYear() +"},\r\n"+
                "publisher = {"+book.getPublisher()+"},\r\n}";
-        return ok(result);
+        return ok(c(result));
     }
+
+
 
     public static Result addProceedings(){
         create.render(form(Inproceedings.class));
@@ -134,6 +143,32 @@ public class Application extends Controller {
         return redirect(controllers.routes.Application.createProceedings());
     }
 
+    public static Result deleteProceedings(String id){
+        List<Inproceedings> inproceedingses = new Model.Finder(String.class, Inproceedings.class).all();
+        for(Inproceedings i : inproceedingses){
+            if(i.getId().equals(id)){
+                i.delete();
+            }
+        }
+        return  redirect(controllers.routes.Application.createProceedings());
+    }
+
+    public static Result deleteArticle(String id){
+        List<Article> articles = new Model.Finder(String.class, Article.class).all();
+        for(Article a : articles){
+            if(a.getId().equals(id)) a.delete();
+        }
+        return  redirect(controllers.routes.Application.createProceedings());
+    }
+
+    public static Result deleteBook(String id){
+        List<Book> books = new Model.Finder(String.class, Book.class).all();
+        for(Book b : books){
+            if(b.getId().equals(id)) b.delete();
+        }
+        return  redirect(controllers.routes.Application.createProceedings());
+    }
+
     //Palauttaa URIssa annetun id:n perusteella oikean proceedingsin
     public static Result showProceeding(String id){
         List<Inproceedings> inproceedings = new Model.Finder(String.class, Inproceedings.class).all();
@@ -149,7 +184,7 @@ public class Application extends Controller {
         for(Article a : articles){
             if(a.getId().equals(id)) return ok(toJson(a));
         }
-        return ok(toJson(null));
+        return ok("lol");
     }
 
     public static Result showBook(String id){

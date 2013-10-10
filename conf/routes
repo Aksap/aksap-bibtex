@@ -10,6 +10,9 @@ POST    /proceedings/add            controllers.Application.addProceedings()
 POST    /articles/add               controllers.Application.addArticle()
 POST    /books/add                  controllers.Application.addBook()
 POST    /misc/add                   controllers.Application.addMisc()
+GET    /proceedings/delete/:id      controllers.Application.deleteProceedings(id: String)
+GET    /articles/delete/:id         controllers.Application.deleteArticle(id: String)
+GET    /books/delete/:id            controllers.Application.deleteBook(id: String)
 
 # JSON
 GET     /proceedings/show/:id       controllers.Application.showProceeding(id: String)
